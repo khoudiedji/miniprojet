@@ -4,60 +4,50 @@ import java.util.List;
 
 public class Vol {
     private String numeroVol;
-    private String origine;
-    private String destination;
+    private Aeroport origine;
+    private Aeroport destination;
     private Date dateDepart;
     private Date dateArrivee;
-    private Pilote pilote;
-    private List<PersonnelCabine> personnelCabine;
-    private List<Reservation> reservations;
+    private String etat;
+    private List<Passager> passagers = new ArrayList<>();
 
-    public Vol(String numeroVol, String origine, String destination,
-               Date dateDepart, Date dateArrivee) {
+    public Vol(String numeroVol, Aeroport origine, Aeroport destination, String dateHeureDepart, String dateHeureArrivee) {
         this.numeroVol = numeroVol;
         this.origine = origine;
         this.destination = destination;
         this.dateDepart = dateDepart;
         this.dateArrivee = dateArrivee;
-        this.personnelCabine = new ArrayList<>();
-        this.reservations = new ArrayList<>();
+        this.etat = "Planifié";
     }
 
-    public void affecterVol(Pilote pilote) {
-        this.pilote = pilote;
-    }
-
-    public void ajouterPersonnel(PersonnelCabine personnel) {
-        personnelCabine.add(personnel);
-    }
-
-    public void ajouterReservation(Reservation reservation) {
-        reservations.add(reservation);
+    public void planifierVol() {
+        this.etat = "Planifié";
+        System.out.println("Vol planifié.");
     }
 
     public void annulerVol() {
-        System.out.println("Vol " + numeroVol + " annulé");
-        for (Reservation res : reservations) {
-            res.annulerReservation();
-        }
+        this.etat = "Annulé";
+        System.out.println("Vol annulé.");
     }
 
-    public void obtenirVol() {
-        System.out.println("Vol " + numeroVol);
-        System.out.println("Trajet: " + origine + " -> " + destination);
-        System.out.println("Date: " + dateDepart);
-        if (pilote != null) {
-            System.out.println("Pilote: " + pilote.getNom());
-        }
-        System.out.println("Nombre de réservations: " + reservations.size());
+    public void modifierVol(Date nouvelleDateDep, Date nouvelleDateArr) {
+        this.dateDepart = nouvelleDateDep;
+        this.dateArrivee = nouvelleDateArr;
+        System.out.println("Horaires du vol modifiés.");
     }
 
-    // Getters
-    public String getNumeroVol() { return numeroVol;
+    public void ajouterPassager(Passager p) {
+        passagers.add(p);
     }
-    public String getOrigine() { return origine; }
-    public String getDestination() { return destination; }
-    public Date getDateDepart() { return dateDepart; }
-    public Date getDateArrivee() { return dateArrivee; }
+
+    public List<Passager> listingPassager() {
+        return passagers;
+    }
+
+    public String getNumeroVol() {
+        return numeroVol;
+    }
+    public Date getDateDepart() {return dateDepart;}
+    public Date getDateArrivee() {return dateArrivee;}
 
 }

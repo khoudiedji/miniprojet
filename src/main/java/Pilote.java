@@ -3,10 +3,9 @@ import java.util.List;
 public class Pilote extends Employe{
     private String licence;
     private int heuresDeVol;
-    private List<Vol> volsAffectes;
-
+    private Vol volAffecte;
     public Pilote(int identifiant, String nom, String adresse, String contact,
-                  int numeroEmployee, String dateEmbauche,
+                  String numeroEmployee, String dateEmbauche,
                   String licence, int heuresDeVol) {
         super(identifiant, nom, adresse, contact, numeroEmployee, dateEmbauche);
         this.licence = licence;
@@ -14,19 +13,23 @@ public class Pilote extends Employe{
     }
 
     @Override
-    public void ObtenirInfos() {
-        super.ObtenirInfos();
+    public void obtenirInfos() {
+        super.obtenirInfos();
         System.out.println("Licence: " + licence);
         System.out.println("Heures de vol: " + heuresDeVol);
     }
 
     @Override
-    public String ObtenirRole() {
+    public String obtenirRole() {
         return "Pilote";
     }
 
+    public Vol obtenirVol() {
+        return volAffecte;
+    }
+
     public void affecterVol(Vol vol) {
-        volsAffectes.add(vol);
+        this.volAffecte=vol;
         System.out.println("Pilote " + getNom() + " affecté au vol " + vol.getNumeroVol());
     }
 }

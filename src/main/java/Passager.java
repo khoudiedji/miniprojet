@@ -1,28 +1,40 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Passager extends Personne{
     String passeport;
 
-    private List<Reservation> reservations;
+    private List<Reservation> reservations = new ArrayList<>();
 
-    public Passager(int identifiant, String nom, String adresse, String contact) {
+    public Passager(int identifiant, String nom, String adresse, String contact, String passeport) {
         super(identifiant, nom, adresse, contact);
-        this.reservations = new ArrayList<>();
+        this.passeport = passeport;
     }
 
-    public void reserverVol(Vol vol, String dateReservation) {
-        Reservation reservation = new Reservation(generateReservationId(), this, vol, dateReservation);
-        reservations.add(reservation);
-        vol.ajouterReservation(reservation);
+    public void reserverVol(Vol vol) {
+        Reservation res = new Reservation("RES" + (reservations.size() + 1), vol);
+        reservations.add(res);
+        vol.ajouterPassager(this);
+        System.out.println("Réservation effectuée pour le vol " + vol.getNumeroVol());
     }
 
-    public void annulerReservation(String reservationId) {
-        reservations.removeIf(r -> r.getNumeroReservation().equals(reservationId));
+    public void annulerReservation(String numeroReservation) {
+        boolean trouve = false;
+        for (int i = 0; i < reservations.size(); i++) {
+            if (reservations.get(i).getNumeroReservation().equals(numeroReservation)) {
+                reservations.get(i).annulerReservation();
+                reservations.remove(i);
+                System.out.println("Réservation " + numeroReservation + " annulée.");
+                trouve = true;
+                break;
+            }
+        }
+        if (!trouve) {
+            System.out.println("Réservation " + numeroReservation + " introuvable.");
+        }
     }
 
-    private String generateReservationId() {
-        return "RES-" + UUID.randomUUID().toString().substring(0, 8);
+    public List<Reservation> obtenirReservations() {
+        return reservations;
     }
 }

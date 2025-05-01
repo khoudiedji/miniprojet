@@ -3,13 +3,13 @@ import java.util.Date;
 import java.util.List;
 
 public class Avion {
-    private String numeroSerie;
+    private String Immatriculation;
     private String modele;
     private int capacite;
     private List<Vol> vols;
 
-    public Avion(String numeroSerie, String modele, int capacite) {
-        this.numeroSerie = numeroSerie;
+    public Avion(String immatriculation, String modele, int capacite) {
+        this.Immatriculation = immatriculation;
         this.modele = modele;
         this.capacite = capacite;
         this.vols = new ArrayList<>();

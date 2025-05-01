@@ -1,31 +1,38 @@
 public class Reservation {
     private String numeroReservation;
-    private Passager passager;
-    private Vol vol;
     private String dateReservation;
-    private boolean estAnnulee;
+    private String statut;
+    private Vol vol;
 
-    public Reservation(String numeroReservation, Passager passager, Vol vol, String dateReservation) {
+    public Reservation(String numeroReservation, Vol vol) {
         this.numeroReservation = numeroReservation;
-        this.passager = passager;
+        this.dateReservation = java.time.LocalDate.now().toString();
+        this.statut = "En attente";
         this.vol = vol;
-        this.dateReservation = dateReservation;
-        this.estAnnulee = false;
+    }
+
+    public void confirmerReservation() {
+        this.statut = "Confirmée";
+        System.out.println("Réservation " + numeroReservation + " confirmée.");
     }
 
     public void annulerReservation() {
-        this.estAnnulee = true;
-        System.out.println("Réservation " + numeroReservation + " annulée");
+        this.statut = "Annulée";
+        System.out.println("Réservation " + numeroReservation + " annulée.");
     }
 
-    public void obtenirReservations() {
-        System.out.println("Réservation " + numeroReservation);
-        System.out.println("Passager: " + passager.getNom());
-        System.out.println("Vol: " + vol.getNumeroVol());
-        System.out.println("Date réservation: " + dateReservation);
-        System.out.println("Statut: " + (estAnnulee ? "Annulée" : "Confirmée"));
+    public void modifierReservation(String nouveauStatut) {
+        this.statut = nouveauStatut;
+        System.out.println("Statut de la réservation " + numeroReservation + " modifié.");
     }
 
-    // Getters
-    public String getNumeroReservation() { return numeroReservation; }
+    public String getNumeroReservation() {
+        return numeroReservation;
+    }
+
+    public static String getNumeroReservation(String numeroReservation) {return numeroReservation;}
+    public String getDateReservation() {return dateReservation;}
+    public String getStatut() {return statut;}
+
+
 }

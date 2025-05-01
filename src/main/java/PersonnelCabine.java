@@ -1,19 +1,25 @@
 import java.util.List;
 
 public class PersonnelCabine extends Employe {
-    private List<Vol> volsAffectes;
+    private Vol volAffecte;
+    private String qualificaion;
     public PersonnelCabine(int identifiant, String nom, String adresse, String contact,
-                           int numeroEmployee, String dateEmbauche) {
+                           String numeroEmployee, String dateEmbauche, String qualificaion) {
         super(identifiant, nom, adresse, contact, numeroEmployee, dateEmbauche);
+        this.qualificaion = qualificaion;
     }
 
     @Override
-    public String ObtenirRole() {
+    public String obtenirRole() {
         return "Personnel de cabine";
     }
 
     public void affecterVol(Vol vol) {
-        vol.ajouterPersonnel(this);
-        System.out.println("Personnel " + getNom() + " affecté au vol " + vol.getNumeroVol());
+        this.volAffecte = vol;
+        System.out.println("Vol " + vol.getNumeroVol() + " affecté au personnel cabine.");
+    }
+
+    public Vol obtenirVol() {
+        return volAffecte;
     }
 }

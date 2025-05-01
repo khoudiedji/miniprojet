@@ -10,7 +10,7 @@ public class Personne {
         this.adresse = adresse;
         this.contact = contact;
     }
-    public void ObtenirInfos(){
+    public void obtenirInfos(){
         System.out.println("Identifiant : " + identifiant + "\nNom : " + nom + "\nAdresse : " + adresse + "\nContact : " + contact);
     }
 
